@@ -1,6 +1,7 @@
 package io.mu.userinterface
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -24,10 +25,20 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         binding.textView.text = "Merhaba Musa"
+//        binding.button.setOnClickListener {
+//            binding.textView.text = "Butona tıklandı"
+//        }
 
 //        val image = findViewById<ImageView>(R.id.imageView)
 //        val myTextView = findViewById<TextView>(R.id.textView)
 //        myTextView.text = "Merhaba Kotlin"
 //        image.setImageResource(R.drawable.datascience)
+    }
+
+    fun save(view: View){
+        binding.textView.text = "Kayıt Edildi!"
+    }
+    fun cancel(view: View){
+        binding.textView.text = "İptal Edildi!"
     }
 }

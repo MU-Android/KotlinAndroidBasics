@@ -1,7 +1,9 @@
 package io.mu.lifecycle
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        binding.btnOpenSecondActivity.setOnClickListener(::openSecondActivity)
         Log.w("MainActivityLog", "onCreate run")
     }
 
@@ -49,5 +53,11 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.w("MainActivityLog", "onDestroy run")
+    }
+
+    private fun openSecondActivity(view: View?){
+
+        val userInput = binding.edtName.text.toString()
+        binding.txtName.text = "İsim: $userInput"
     }
 }

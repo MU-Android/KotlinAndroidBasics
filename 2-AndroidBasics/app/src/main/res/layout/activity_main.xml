@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="260dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="50dp"
+        android:hint="İsminizi Giriniz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Kaydet"
+        app:layout_constraintStart_toStartOf="@+id/edtName"
+        app:layout_constraintTop_toBottomOf="@+id/edtName" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sil"
+        app:layout_constraintEnd_toEndOf="@+id/edtName"
+        app:layout_constraintTop_toTopOf="@+id/btnSave" />
+
+    <TextView
+        android:id="@+id/txtSavedName"
+        android:layout_width="255dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:text="Kaydedilen İsim: "
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

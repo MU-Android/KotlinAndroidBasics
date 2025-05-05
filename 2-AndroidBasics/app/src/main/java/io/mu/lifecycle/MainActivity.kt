@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,45 +27,16 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnOpenSecondActivity.setOnClickListener(::openSecondActivity)
-        Log.w("MainActivityLog", "onCreate run")
+        Toast.makeText(this@MainActivity,"Hoşgeldiniz",Toast.LENGTH_LONG).show()
+
+//        binding.btnSave.setOnClickListener(object : View.OnClickListener{
+//            override fun onClick(view: View?) {
+//                this@MainActivity.save(view)
+//            }
+//        })
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.w("MainActivityLog", "onStart run")
-    }
+    private fun save(view: View?){
 
-    override fun onResume() {
-        super.onResume()
-        Log.w("MainActivityLog", "onResume run")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.w("MainActivityLog", "onPause run")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.w("MainActivityLog", "onStop run")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.w("MainActivityLog", "onDestroy run")
-    }
-
-    private fun openSecondActivity(view: View?){
-
-        val intent = Intent(this, SecondActivity::class.java)
-        val userInput = binding.edtName.text.toString()
-        intent.putExtra("name",userInput)
-        startActivity(intent)
-
-
-//        finish()
-//        val userInput = binding.edtName.text.toString()
-//        binding.txtName.text = "İsim: $userInput"
     }
 }

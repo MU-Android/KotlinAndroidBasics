@@ -25,11 +25,8 @@ class SecondActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnOpenFirstActivity.setOnClickListener(::openFirstActivity)
+        val intentFromMain = intent.getStringExtra("name")
+        binding.txtActivityTransferText.text = intentFromMain
     }
 
-    private fun openFirstActivity(view: View?){
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
 }

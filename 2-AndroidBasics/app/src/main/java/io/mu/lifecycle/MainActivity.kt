@@ -1,5 +1,6 @@
 package io.mu.lifecycle
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -22,29 +23,32 @@ class MainActivity : AppCompatActivity() {
         val getUsername = sharedPreferences.getString("name", "")
         binding.txtSavedName.text = getUsername
 
-        binding.btnSave.setOnClickListener(::save)
-        binding.btnDelete.setOnClickListener(::delete)
+        binding.btnSave.setOnClickListener(::openCalculator)
     }
 
-    private fun save(view: View?){
-        val userName = binding.edtName.text.toString()
-        if (userName == ""){
-            Toast.makeText(this@MainActivity, "İsminizi Boş Bırakmayınız!", Toast.LENGTH_SHORT).show()
-        }else{
-            sharedPreferences.edit().putString("name", userName).apply()
-            binding.txtSavedName.text = userName
-        }
+//    private fun save(view: View?){
+//        val userName = binding.edtName.text.toString()
+//        if (userName == ""){
+//            Toast.makeText(this@MainActivity, "İsminizi Boş Bırakmayınız!", Toast.LENGTH_SHORT).show()
+//        }else{
+//            sharedPreferences.edit().putString("name", userName).apply()
+//            binding.txtSavedName.text = userName
+//        }
+//
+//    }
+//
+//    private fun delete(view: View?){
+//        val getUsername = sharedPreferences.getString("name", "")
+//        if (getUsername != ""){
+//            sharedPreferences.edit().remove("name").apply()
+//        }else {
+//            Toast.makeText(this@MainActivity, "İsim Kayıtlı Değil!", Toast.LENGTH_SHORT).show()
+//        }
+//
+//        binding.txtSavedName.text = sharedPreferences.getString("name", "")
+//    }
 
-    }
-
-    private fun delete(view: View?){
-        val getUsername = sharedPreferences.getString("name", "")
-        if (getUsername != ""){
-            sharedPreferences.edit().remove("name").apply()
-        }else {
-            Toast.makeText(this@MainActivity, "İsim Kayıtlı Değil!", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.txtSavedName.text = sharedPreferences.getString("name", "")
+    private fun openCalculator(view: View?){
+        startActivity(Intent(this@MainActivity, CalculatorActivity::class.java))
     }
 }

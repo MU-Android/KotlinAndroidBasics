@@ -1,11 +1,13 @@
 package io.mu.lifecycle
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -27,7 +29,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        Toast.makeText(this@MainActivity,"Hoşgeldiniz",Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity,"Hoşgeldiniz",Toast.LENGTH_SHORT).show()
+        binding.btnSave.setOnClickListener(::save)
 
 //        binding.btnSave.setOnClickListener(object : View.OnClickListener{
 //            override fun onClick(view: View?) {
@@ -37,6 +40,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun save(view: View?){
-
+        val alert = AlertDialog.Builder(this@MainActivity)
+        alert.setTitle("Kaydet")
+        alert.setMessage("Kaydetmek istediğinize emin misiniz?")
+        alert.setPositiveButton("Evet", {
+            dialog, which ->
+            Toast.makeText(this@MainActivity,"Kayıt Edildi",Toast.LENGTH_SHORT).show()
+        })
+        alert.setNegativeButton("Hayır", { dialog, which ->
+            Toast.makeText(this@MainActivity,"Kayıt İptal Edildi",Toast.LENGTH_SHORT).show()
+        })
+        alert.show()
     }
 }

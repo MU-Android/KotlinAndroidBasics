@@ -1,20 +1,15 @@
 package io.mu.lifecycle
 
-import android.content.DialogInterface
-import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import io.mu.lifecycle.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,34 +17,34 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        sharedPreferences = getSharedPreferences("io.mu.lifecycle", MODE_PRIVATE)
 
-        Toast.makeText(this@MainActivity,"Hoşgeldiniz",Toast.LENGTH_SHORT).show()
+        val getUsername = sharedPreferences.getString("name", "")
+        binding.txtSavedName.text = getUsername
+
         binding.btnSave.setOnClickListener(::save)
-
-//        binding.btnSave.setOnClickListener(object : View.OnClickListener{
-//            override fun onClick(view: View?) {
-//                this@MainActivity.save(view)
-//            }
-//        })
+        binding.btnDelete.setOnClickListener(::delete)
     }
 
     private fun save(view: View?){
-        val alert = AlertDialog.Builder(this@MainActivity)
-        alert.setTitle("Kaydet")
-        alert.setMessage("Kaydetmek istediğinize emin misiniz?")
-        alert.setPositiveButton("Evet", {
-            dialog, which ->
-            Toast.makeText(this@MainActivity,"Kayıt Edildi",Toast.LENGTH_SHORT).show()
-        })
-        alert.setNegativeButton("Hayır", { dialog, which ->
-            Toast.makeText(this@MainActivity,"Kayıt İptal Edildi",Toast.LENGTH_SHORT).show()
-        })
-        alert.show()
+        val userName = binding.edtName.text.toString()
+        if (userName == ""){
+            Toast.makeText(this@MainActivity, "İsminizi Boş Bırakmayınız!", Toast.LENGTH_SHORT).show()
+        }else{
+            sharedPreferences.edit().putString("name", userName).apply()
+            binding.txtSavedName.text = userName
+        }
+
+    }
+
+    private fun delete(view: View?){
+        val getUsername = sharedPreferences.getString("name", "")
+        if (getUsername != ""){
+            sharedPreferences.edit().remove("name").apply()
+        }else {
+            Toast.makeText(this@MainActivity, "İsim Kayıtlı Değil!", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.txtSavedName.text = sharedPreferences.getString("name", "")
     }
 }

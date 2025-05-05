@@ -57,7 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun openSecondActivity(view: View?){
 
-        val userInput = binding.edtName.text.toString()
-        binding.txtName.text = "İsim: $userInput"
+        val intent = Intent(this, SecondActivity::class.java)
+        startActivity(intent)
+
+//        val userInput = binding.edtName.text.toString()
+//        binding.txtName.text = "İsim: $userInput"
     }
 }

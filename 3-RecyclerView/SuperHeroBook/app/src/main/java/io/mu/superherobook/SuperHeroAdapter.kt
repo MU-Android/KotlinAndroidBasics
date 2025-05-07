@@ -25,6 +25,7 @@ class SuperHeroAdapter(val superHeroList : ArrayList<SuperHero>) : RecyclerView.
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, IntroductionActivity::class.java)
+            intent.putExtra("superHero",superHeroList[position])
             holder.itemView.context.startActivity(intent)
         }
     }

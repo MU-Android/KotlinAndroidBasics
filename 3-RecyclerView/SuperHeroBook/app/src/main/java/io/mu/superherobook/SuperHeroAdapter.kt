@@ -1,5 +1,6 @@
 package io.mu.superherobook
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,11 @@ class SuperHeroAdapter(val superHeroList : ArrayList<SuperHero>) : RecyclerView.
         position: Int
     ) {
         holder.binding.textViewRecyclerView.text = superHeroList[position].name
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, IntroductionActivity::class.java)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

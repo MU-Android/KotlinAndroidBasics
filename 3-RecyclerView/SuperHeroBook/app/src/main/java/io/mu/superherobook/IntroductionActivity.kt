@@ -16,12 +16,16 @@ class IntroductionActivity : AppCompatActivity() {
         binding = ActivityIntroductionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapterIntent = intent
+        //val adapterIntent = intent
         //adapterIntent.getSerializableExtra("superHero", SuperHero::class.java)
-        val hero = adapterIntent.getSerializableExtra("superHero") as SuperHero
+        //val hero = adapterIntent.getSerializableExtra("superHero") as SuperHero
 
-        binding.imageView.setImageResource(hero.image)
-        binding.textViewName.text = hero.name
-        binding.textViewJob.text = hero.job
+        val hero = MySingleton.choosedSuperHero
+
+        hero?.let {
+            binding.imageView.setImageResource(hero.image)
+            binding.textViewName.text = hero.name
+            binding.textViewJob.text = hero.job
+        }
     }
 }

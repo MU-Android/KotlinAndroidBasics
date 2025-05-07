@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.mu.superherobook.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,5 +24,9 @@ class MainActivity : AppCompatActivity() {
         val hulk = SuperHero("Hulk", "Öğrenci", R.drawable.hulk)
 
         superHeroList = arrayListOf(superman, batman, ironman, hulk)
+
+        val adapter = SuperHeroAdapter(superHeroList)
+        binding.superHeroRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.superHeroRecyclerView.adapter = adapter
     }
 }

@@ -18,5 +18,9 @@
         android:id="@+id/secondFragment"
         android:name="io.mu.fragmentandnavigation.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_second" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
 </navigation>

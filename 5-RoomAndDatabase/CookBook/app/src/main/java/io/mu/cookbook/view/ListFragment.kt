@@ -1,4 +1,4 @@
-package io.mu.cookbook
+package io.mu.cookbook.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -21,6 +21,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import io.mu.cookbook.databinding.FragmentRecipeBinding
+import androidx.core.graphics.scale
+import io.mu.cookbook.model.Recipe
+import java.io.ByteArrayOutputStream
 
 class RecipeFragment : Fragment() {
     private var _binding: FragmentRecipeBinding? = null
@@ -72,7 +75,17 @@ class RecipeFragment : Fragment() {
     }
 
     private fun save(view: View){
+        val name = binding.edtName.text.toString()
+        val ingredient = binding.edtIngredient.text.toString()
 
+        if(chooseBitmap != null){
+            val resizedBitmap = resizeBitmap(chooseBitmap!!,300)
+            val outputStream = ByteArrayOutputStream()
+            resizedBitmap.compress(Bitmap.CompressFormat.PNG, 50, outputStream)
+            val byteArray = outputStream.toByteArray()
+
+            val recipe = Recipe(name, ingredient, byteArray)
+        }
     }
 
     private fun delete(view: View){
@@ -183,5 +196,25 @@ class RecipeFragment : Fragment() {
                     Toast.makeText(requireContext(), "İzin verilmedi!", Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    private fun resizeBitmap(chooseUserBitmap: Bitmap, maximumSize: Int): Bitmap {
+        var width = chooseUserBitmap.width
+        var height = chooseUserBitmap.height
+
+        val bitmapRate = width.toFloat() / height.toFloat()
+
+        if (bitmapRate > 1){
+            width = maximumSize
+            val reducedHeight = width / bitmapRate
+            height = reducedHeight.toInt()
+        }else{
+            height = maximumSize
+            val reducedWidth = height * bitmapRate
+            width = reducedWidth.toInt()
+        }
+
+        return Bitmap.createScaledBitmap(chooseUserBitmap, width, height, true)
+//        return chooseUserBitmap.scale(width, height)
     }
 }

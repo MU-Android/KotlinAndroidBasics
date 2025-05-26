@@ -85,6 +85,7 @@ class RecipeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        mDispoasble.clear()
     }
 
     private fun save(view: View){

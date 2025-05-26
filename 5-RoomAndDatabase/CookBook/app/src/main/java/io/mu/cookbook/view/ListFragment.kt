@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import io.mu.cookbook.adapter.RecipeAdapter
 import io.mu.cookbook.databinding.FragmentListBinding
 import io.mu.cookbook.model.Recipe
 import io.mu.cookbook.roomdb.RecipeDAO
@@ -54,10 +55,8 @@ class ListFragment : Fragment() {
     }
 
     private fun handleResponse(recipes : List<Recipe>){
-        recipes.forEach {
-            println(it.name)
-            println(it.ingredients)
-        }
+        val adapter = RecipeAdapter(recipes)
+        binding.recipeRecyclerView.adapter = adapter
     }
 
     override fun onDestroyView() {

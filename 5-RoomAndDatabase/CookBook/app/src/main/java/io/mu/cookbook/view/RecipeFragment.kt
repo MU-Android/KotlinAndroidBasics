@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -78,10 +79,21 @@ class RecipeFragment : Fragment() {
             }else{
                 binding.btnDelete.isEnabled = true
                 binding.btnSave.isEnabled = false
+                val id = RecipeFragmentArgs.fromBundle(it).id
+                mDispoasble.add(recipeDAO.findById(id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(mainThread())
+                    .subscribe(::handleResponse))
             }
         }
     }
 
+    private fun handleResponse(recipe : Recipe){
+        binding.edtName.setText(recipe.name)
+        binding.edtIngredient.setText(recipe.ingredients)
+        val bitmap = BitmapFactory.decodeByteArray(recipe.image, 0, recipe.image.size)
+        binding.imageView.setImageBitmap(bitmap)
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
